@@ -1,29 +1,31 @@
 import Button from "./Button.js";
 import Screen from "./Screen.js";
 import TimeGame from "./TimeGame";
+import Hearts from "./Hearts";
 
-state = "timeGame";
+state = "main";
 
-let test = new Screen();
-let buttonTest = new Button (100, 100, 100, 100);
-let firstGame = new TimeGame();
+let background = new Screen();
 
+//timeGame objects
+let foodButton = new Button();
+let gameOne = new TimeGame();
+let friendship = new Hearts();
 
 
 function draw () {
-    test.display();
-    firstGame.animationBasedOnCounter();
-    buttonTest.display();
-    foodButton.display();
+    clear();
+    background.display();
+    console.log(state);
 
-    if (foodButton.hitTest()){
-        foodButton.movement = 0;
+    //connecting timeGame with Hearts and Screens through variable state
+    if (gameOne.winning()){
+        state = "winScreen";
+        friendship.addingHearts();
+    } else if (gameOne.noMoreLifePoints()){
+        state = "loseScreen";
+        friendship.destroyingHearts();
     }
 }
 
-function mouseClicked(){
-    if (buttonTest.hitTest()){
-        console.log("thank you");
-    }
-}
 
