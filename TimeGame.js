@@ -8,6 +8,7 @@ export default class TimeGame {
         this.game = "";
         this.lifePoints = 3;
         this.lifePointY = 0;
+        this.foodBowl = loadImage ("assets/foodBowl.png");
     }
 
     display(){
@@ -41,7 +42,7 @@ export default class TimeGame {
         }
 
         //foodbowl
-        rect (150, 320, 100, 50);
+        image (this.foodBowl, 150, 320, 100, 50);
 
         //lifePoints
         for (this.lifePointY = 0; this.lifePointY < this.lifePoints * 30; this.lifePointY+=30){

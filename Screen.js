@@ -1,7 +1,7 @@
 export default class Screen {
     constructor (){
         this.startScreen = loadImage("assets/startScreen.png");
-        this.mainScreen = loadImage("assets/startScreen.png");
+        this.mainScreen = loadImage("assets/mainScreen.png");
         this.timeGame = loadImage("assets/timeGame.png");
         this.winScreen = loadImage("assets/winScreen.png");
         this.loseScreen = loadImage("assets/loseScreen.png");

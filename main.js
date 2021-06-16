@@ -3,7 +3,7 @@ import Screen from "./Screen.js";
 import TimeGame from "./TimeGame";
 import Hearts from "./Hearts";
 
-state = "main";
+state = "timeGame";
 
 let background = new Screen();
 
