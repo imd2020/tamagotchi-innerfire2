@@ -1,28 +1,24 @@
 import Button from "./Button.js";
+import Screen from "./Screen.js";
+import TimeGame from "./TimeGame";
 
-let startScreen = loadImage("assets/startScreen.png");
-let mainScreen = loadImage("assets/mainScreen.png");
+state = "timeGame";
 
-let state = "main";
-
-function screens(){
-    
-    if (state === "main"){
-        image (mainScreen, 0, 0, 400, 400);    
-    }  
-
-    if (state === "start"){
-        image (startScreen, 0, 0, 400, 400);
-    }
-}
-
+let test = new Screen();
 let buttonTest = new Button (100, 100, 100, 100);
+let firstGame = new TimeGame();
 
 
 
 function draw () {
-    screens();
+    test.display();
+    firstGame.animationBasedOnCounter();
     buttonTest.display();
+    foodButton.display();
+
+    if (foodButton.hitTest()){
+        foodButton.movement = 0;
+    }
 }
 
 function mouseClicked(){
