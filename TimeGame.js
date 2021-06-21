@@ -1,52 +1,67 @@
+import Button from "./Button.js";
+
 export default class TimeGame {
     constructor(){
+        //states
+        this.buttonState = "";
+
+        //position of food and foodbag
         this.x = 50;
         this.y = 50;
-        this.buttonState = "";
+        
+        //animation variables
         this.foodBagMovement = 5;
         this.foodMovement = 5;
-        this.game = "";
+        
+        //lifePoint variables
         this.lifePoints = 3;
         this.lifePointY = 0;
-        this.foodBowl = loadImage ("assets/foodBowl.png");
+
+        //images
+        this.foodBowlForeground = loadImage ("assets/foodBowlForeground.png");
+        this.foodBowlBackground = loadImage ("assets/foodBowlBackground.png");
+        this.foodBag = loadImage ("assets/foodBag.png");
+        this.food = loadImage ("assets/food.png");
+        this.lifePoint = loadImage ("assets/lifePoint.png");
+
+        //objects
+        this.foodButton = new Button(150, 320, 100, 50);
     }
 
     display(){
 
         //foodbag
-        push();
-        fill(0);
-        rect (this.x,this.y, 70, 70);
+        image (this.foodBag, this.x,this.y, 70, 70);
         this.x += this.foodBagMovement;
-        pop();
 
         //foodbag animation
         if (this.x === 280 || this.x === 50){
             this.foodBagMovement = -this.foodBagMovement;
         }
 
+        //animation
+        if (this.foodButton.hitTest() && mouseIsPressed){
+            this.foodBagMovement = 0;
+            this.buttonState = "clicked";
+        } 
+
+        //foodBowl Background
+
+        image (this.foodBowlBackground, 150, 320, 100, 50);
+        
         //food
         if (this.buttonState === "clicked" && this.foodMovement <= 270){
-             push();
-            fill(200, 0, 0);
-            rect(this.x +10, this.y + this.foodMovement, 50, 50);
-            pop();
+            image (this.food, this.x +10, this.y + this.foodMovement, 50, 50);
 
             this.foodMovement+= 5;
         }
 
-        //animation
-        if (foodButton.hitTest && mouseIsPressed){
-            this.foodBagMovement = 0;
-            this.buttonState = "clicked";
-        }
-
-        //foodbowl
-        image (this.foodBowl, 150, 320, 100, 50);
+        //foodbowl Foreground
+        image (this.foodBowlForeground, 150, 320, 100, 50);
 
         //lifePoints
         for (this.lifePointY = 0; this.lifePointY < this.lifePoints * 30; this.lifePointY+=30){
-            rect (320, 250 + this.lifePointY, 30, 30);
+            image (this.lifePoint, 320, 250 + this.lifePointY, 30, 30);
              }
             
     }
@@ -68,13 +83,29 @@ export default class TimeGame {
         }
     }
 
-    reset (){
+    resetWhenLosing (){
         if (this.winning() === false && this.foodMovement >= 270){
             this.foodMovement = 5;
             this.foodBagMovement = 5;
             this.buttonState = "";
             this.lifePoints -= 1;
-            console.log(this.lifePoints);
         }
+    }
+
+    resetWhenWinning(){
+           //states
+           this.buttonState = "";
+
+           //position of food and foodbag
+           this.x = 50;
+           this.y = 50;
+           
+           //animation variables
+           this.foodBagMovement = 5;
+           this.foodMovement = 5;
+           
+           //lifePoint variables
+           this.lifePoints = 3;
+           this.lifePointY = 0;
     }
 }
