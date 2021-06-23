@@ -1,5 +1,4 @@
 import Button from "./Button.js";
-
 export default class TimeGame {
     constructor(){
         //states

@@ -3,133 +3,165 @@ import Hearts from "./Hearts.js";
 import TimeGame from "./TimeGame.js";
 import Time from "./Time.js";
 
-class Screen {
-    constructor (){
-        this.state = "start"; 
+//images
+let startScreen = loadImage("assets/startScreen.png");
+let mainScreen = loadImage("assets/mainScreen.png");
+let explanation = loadImage("assets/explanation.png");
+let timeGame = loadImage("assets/timeGame.png");
+let winScreen = loadImage("assets/winScreen.png");
+let loseScreen = loadImage("assets/loseScreen.png");
+let evolvingMessage = loadImage("assets/evolvingMessage.png");
+let umbreon = loadImage("assets/umbreon.png");
+let espeon = loadImage("assets/espeon.png");
+  
+ 
+//buttons
+let startButton = new Button (160, 330, 125, 38);    
+let timeGameButton = new Button (30, 258, 108, 98);
+let questionButton = new Button (18, 16, 49, 50);
+let backButton = new Button (164, 341, 80, 32);
+let continueButton = new Button (130, 325, 159, 35);
+let evolvingButton = new Button (137, 253, 159, 35);
+let restartButton = new Button (147, 342, 122, 28);
 
-        //images
-        this.startScreen = loadImage("assets/startScreen.png");
-        this.mainScreen = loadImage("assets/mainScreen.png");
-        this.timeGame = loadImage("assets/timeGame.png");
-        this.winScreen = loadImage("assets/winScreen.png");
-        this.loseScreen = loadImage("assets/loseScreen.png");
-        this.evolvingMessage = loadImage("assets/evolvingMessage.png");
-        this.umbreon = loadImage("assets/umbreon.png");
-        this.espeon = loadImage("assets/espeon.png");
+let state = "explanation"; 
 
-        //objects
-        this.gameOne = new TimeGame();
-        this.friendship = new Hearts();
-        this.dayOrNight = new Time();
+//objects
+let gameOne = new TimeGame();
+let friendship = new Hearts();
+let dayOrNight = new Time();
 
-        //buttons
-        this.timeGameButton = new Button(30, 258, 108, 98);
-        this.continueButton = new Button(130, 325, 159, 35);
-        this.startButton = new Button (160, 330, 125, 38);
-        this.evolvingButton = new Button (137, 253, 159, 35);
-        this.restartButton = new Button (147, 342, 122, 28);
+
+function display(){
+
+    //start
+    if (state === "start"){
+
+        image (startScreen, 0, 0, 400, 400);
+        }
+
+    //main
+    if (state === "main"){
+
+        image (mainScreen, 0, 0, 400, 400);
+        friendship.display(); 
+        gameOne.resetWhenWinning();   
+        }
+
+    //explanation
+    if (state === "explanation"){
+
+        image (explanation, 0, 0, 400, 400);
+
     }
 
-    display(){
-
-        //start
-        if (this.state === "start"){
-            image (this.startScreen, 0, 0, 400, 400);
-            
-            if (this.startButton.hitTest() && mouseIsPressed){
-                this.state = "main";
-            }
-        }
+    //timeGame
+    if (state === "timeGame"){
         
-        //main
-        if (this.state === "main"){
-            image (this.mainScreen, 0, 0, 400, 400);
-            this.friendship.display(); 
-
-            if (this.timeGameButton.hitTest() && mouseIsPressed){ 
-                this.state = "timeGame";
-            }
-
-            this.gameOne.resetWhenWinning();   
-        } 
-
-        //timeGame
-        if (this.state === "timeGame"){
-            image (this.timeGame, 0, 0, 400, 400);
-            this.gameOne.display();
-            this.gameOne.resetWhenLosing();
+        image (timeGame, 0, 0, 400, 400);
+        gameOne.display();
+        gameOne.resetWhenLosing();
             
-            //changing state and amount of hearts
-            if (this.gameOne.winning()){
-            this.state = "winScreen";
-            this.friendship.addingHearts();
+        //changing state and amount of hearts
+        if (gameOne.winning()){
+        state = "winScreen";
+        friendship.addingHearts();
 
-            } else if (this.gameOne.noMoreLifePoints()){
-            this.state = "loseScreen";
-            this.friendship.destroyingHearts();
+        } else if (gameOne.noMoreLifePoints()){
+        state = "loseScreen";
+        friendship.destroyingHearts();
             }
         }
 
-        //winScreen and loseScreen
-        if (this.state === "winScreen"){
-            image (this.winScreen, 0, 0, 400, 400);
-
-            if (this.continueButton.hitTest() && mouseIsPressed){
-                this.state = "main";
-            }
-        }
-
-        if (this.state === "loseScreen"){
-            image (this.loseScreen, 0, 0, 400, 400);
-
-            if (this.continueButton.hitTest() && mouseIsPressed){
-                this.state = "main";
-            }
-        }
-
-        //evolving
-        if (this.friendship.heartsFull() && this.state === "main" ){
-
-            this.state = "evolving";
-             
-
-        }
-
-        if (this.state === "evolving"){
-            
-            image (this.evolvingMessage, 0, 0, 400, 400);
-        }
-
-        if (this.evolvingButton.hitTest() && mouseIsPressed){
-                this.state = "evolved";
-            }
+    //winScreen and loseScreen
+    if (state === "winScreen"){
         
-        if (this.state === "evolved"){
+        image (winScreen, 0, 0, 400, 400);
+        }
 
-           if(this.dayOrNight.dayTime()){
-                image (this.espeon, 0, 0, 400, 400);
-            } else {
-                image (this.umbreon, 0, 0, 400, 400);
+    if (state === "loseScreen"){
+        
+        image (loseScreen, 0, 0, 400, 400);
+        }
+
+    //evolving
+    if (friendship.heartsFull() && state === "main" ){
+
+        state = "evolving";
+        }
+
+    if (state === "evolving"){
+            
+        image (evolvingMessage, 0, 0, 400, 400);
+        }
+  
+    if (state === "evolved"){
+
+        if(dayOrNight.dayTime()){
+
+            image (espeon, 0, 0, 400, 400);
+        } else {
+
+            image (umbreon, 0, 0, 400, 400);
             } 
-
-            if (this.restartButton.hitTest() && mouseIsPressed && this.state === "evolved"){
-
-                this.state = "start";
-                this.friendship.hearts = 0;
-            }
         }  
     }
+
+function mouseClicked() {
+
+    if (state === "start"){
+            
+        if (startButton.hitTest()){
+            state = "main";
+        }
+    }
+
+    if (state === "main"){
+
+        if (timeGameButton.hitTest()){ 
+            state = "timeGame";
+        }
+
+        if (questionButton.hitTest()){
+            state = "explanation";
+        }
+    }
+
+    if (state === "explanation"){
+
+        if(backButton.hitTest()){
+            state = "main";
+        }
+    }
+
+    if (state === "winScreen" || state === "loseScreen"){
+
+        if (continueButton.hitTest()){
+            state = "main";
+            }
+        }
+
+    if (state === "evolving"){
+    
+        if (evolvingButton.hitTest()){
+            state = "evolved";
+            }
+        }
+
+    if (state === "evolved"){
+
+        if (restartButton.hitTest()){
+
+            state = "start";
+            friendship.hearts = 0;
+            }
+        }  
 }
 
-
-let background = new Screen();
-
-function draw () {
+function draw() {
     clear();
-    background.display();
-
-    console.log(background.state);
-
+    display();
 }
 
+window.mouseClicked = mouseClicked;
 window.draw = draw;
