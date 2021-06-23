@@ -24,7 +24,7 @@ let continueButton = new Button (130, 325, 159, 35);
 let evolvingButton = new Button (137, 253, 159, 35);
 let restartButton = new Button (147, 342, 122, 28);
 
-let state = "explanation"; 
+let state = "start"; 
 
 //objects
 let gameOne = new TimeGame();
