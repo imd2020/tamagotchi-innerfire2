@@ -26,8 +26,10 @@ export default class Hearts {
 
     destroyingHearts(){
         
-        this.hearts--;
-        
+        if (this.hearts !== 0){
+            this.hearts--;
+        }
+ 
     }
 
     heartsFull(){

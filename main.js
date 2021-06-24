@@ -24,7 +24,7 @@ let continueButton = new Button (130, 325, 159, 35);
 let evolvingButton = new Button (137, 253, 159, 35);
 let restartButton = new Button (147, 342, 122, 28);
 
-let state = "start"; 
+let state = "timeGame"; 
 
 //objects
 let gameOne = new TimeGame();
@@ -134,6 +134,11 @@ function mouseClicked() {
         }
     }
 
+    if (state === "timeGame"){
+
+        gameOne.button();
+    }
+
     if (state === "winScreen" || state === "loseScreen"){
 
         if (continueButton.hitTest()){
@@ -158,10 +163,16 @@ function mouseClicked() {
         }  
 }
 
+
+
 function draw() {
     clear();
     display();
+
+    console.log(gameOne.food.y);
 }
+
+gameOne.bagAnimation();
 
 window.mouseClicked = mouseClicked;
 window.draw = draw;
