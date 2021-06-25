@@ -24,7 +24,7 @@ let continueButton = new Button (130, 325, 159, 35);
 let evolvingButton = new Button (137, 253, 159, 35);
 let restartButton = new Button (147, 342, 122, 28);
 
-let state = "timeGame"; 
+let state = "start"; 
 
 //objects
 let gameOne = new TimeGame();
@@ -163,13 +163,9 @@ function mouseClicked() {
         }  
 }
 
-
-
 function draw() {
     clear();
     display();
-
-    console.log(gameOne.food.y);
 }
 
 gameOne.bagAnimation();
