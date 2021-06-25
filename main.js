@@ -21,16 +21,16 @@ let timeGameButton = new Button (30, 258, 108, 98);
 let questionButton = new Button (18, 16, 49, 50);
 let backButton = new Button (164, 341, 80, 32);
 let continueButton = new Button (130, 325, 159, 35);
-let evolvingButton = new Button (137, 253, 159, 35);
-let restartButton = new Button (147, 342, 122, 28);
-
-let state = "start"; 
+let evolvingButton = new Button (135, 300, 157, 35);
+let restartButton = new Button (167, 342, 75, 28);
 
 //objects
 let gameOne = new TimeGame();
 let friendship = new Hearts();
 let dayOrNight = new Time();
 
+//state
+let state = "start"; 
 
 function display(){
 
@@ -52,8 +52,7 @@ function display(){
     if (state === "explanation"){
 
         image (explanation, 0, 0, 400, 400);
-
-    }
+        }
 
     //timeGame
     if (state === "timeGame"){
@@ -109,6 +108,7 @@ function display(){
 
 function mouseClicked() {
 
+    //startButton
     if (state === "start"){
             
         if (startButton.hitTest()){
@@ -116,6 +116,7 @@ function mouseClicked() {
         }
     }
 
+    //timeGame and explanation
     if (state === "main"){
 
         if (timeGameButton.hitTest()){ 
@@ -127,6 +128,7 @@ function mouseClicked() {
         }
     }
 
+    //back to main
     if (state === "explanation"){
 
         if(backButton.hitTest()){
@@ -134,18 +136,21 @@ function mouseClicked() {
         }
     }
 
+    //button for timeGame
     if (state === "timeGame"){
 
         gameOne.button();
     }
 
+    //continueButton
     if (state === "winScreen" || state === "loseScreen"){
 
         if (continueButton.hitTest()){
             state = "main";
             }
         }
-
+    
+    //leads to endscreen
     if (state === "evolving"){
     
         if (evolvingButton.hitTest()){
@@ -153,6 +158,7 @@ function mouseClicked() {
             }
         }
 
+    //restart
     if (state === "evolved"){
 
         if (restartButton.hitTest()){

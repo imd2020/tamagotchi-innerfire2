@@ -84,6 +84,7 @@ export default class TimeGame {
     }
 
     winning(){
+
         if (this.food.y >= 300){
 
             if (this.foodbag.x >= 140 && this.foodbag.x <= 190){
@@ -95,24 +96,28 @@ export default class TimeGame {
     }
 
     noMoreLifePoints(){
+
         if (this.lifePoints === -1) {
             return true;
         }
     }
 
     resetWhenLosing (){
+
         if (this.winning() === false){
             this.buttonState = "";
             this.lifePoints -= 1;
+           
+            //animations
             this.foodbagAnimation.play();
             this.food.y = 52;
-
             this.foodAnimation.restart();
             this.foodAnimation.pause();
         }
     }
 
     resetWhenWinning(){
+
            //states
            this.buttonState = "";
 
@@ -126,6 +131,7 @@ export default class TimeGame {
            this.lifePoints = 3;
            this.lifePointY = 0;
 
+           //animations
            this.foodbagAnimation.play();
            this.foodAnimation.restart();
            this.foodAnimation.pause();

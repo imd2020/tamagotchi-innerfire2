@@ -8,11 +8,13 @@ export default class Hearts {
 
     display(){
 
+        //empty hearts
         for (this.heartsX = 0; this.heartsX < 40 * 5; this.heartsX += 40){
             image (this.emptyHeart, 180 + this.heartsX, 20, 40, 40);
         
              }
-
+        
+        //full hearts
         for (this.heartsX = 0; this.heartsX < 40 * this.hearts; this.heartsX += 40){
             image (this.fullHeart, 180 + this.heartsX, 20, 40, 40);
         }
