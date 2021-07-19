@@ -1,6 +1,6 @@
-import Button from "./Button.js";
-import Hearts from "./Hearts.js";
-import TimeGame from "./TimeGame.js";
+import Button from "./button.js";
+import Hearts from "./hearts.js";
+import TimeGame from "./timeGame.js";
 import Time from "./time.js";
 
 //images
