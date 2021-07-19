@@ -1,7 +1,7 @@
 import Button from "./Button.js";
 import Hearts from "./Hearts.js";
 import TimeGame from "./TimeGame.js";
-import Time from "./Time.js";
+import Time from "./time.js";
 
 //images
 let startScreen = loadImage("assets/startScreen.png");
