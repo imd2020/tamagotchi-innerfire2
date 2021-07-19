@@ -6,6 +6,7 @@ export default class Hearts {
         this.fullHeart = loadImage("assets/fullHeart.png");
     }
 
+    //display
     display(){
 
         //empty hearts
